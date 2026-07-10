@@ -206,16 +206,3 @@ The agent infers this is an `analysis`, makes reasonable assumptions about scope
 **No stray formatting** — Every body text run in the document has `bold=False` and `italic=False` set explicitly. A `_clean_paragraphs` method strips any markdown artifacts (`**bold**`, `*italic*`, `# headings`) that slip through the LLM before they reach the document renderer.
 
 ---
-
-
-## Known Limitations
-
-- Documents are stored in memory and lost on server restart. For production, use S3 or a database.
-- On CPU, each request takes 2–4 minutes with Ollama. Use Groq or a GPU-backed instance for faster results.
-- The agent makes its own assumptions for vague requests. For highly specific documents, a more detailed request produces better output.
-
----
-
-## License
-
-MIT
