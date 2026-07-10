@@ -80,8 +80,6 @@ TODO_agent/
 
 ## Getting Started
 
-### Option A — Run Locally with Ollama (No API key needed)
-
 **1. Install Ollama and pull the model**
 
 ```bash
@@ -118,43 +116,6 @@ http://127.0.0.1:8000
 ```
 
 That's it. Type your request and hit Generate.
-
----
-
-### Option B — Run with Groq (Free API, faster than local)
-
-Groq runs llama3 in the cloud for free and is significantly faster than local CPU inference.
-
-**1. Get a free API key**
-
-Go to [console.groq.com](https://console.groq.com), sign up, and create an API key.
-
-**2. Add it to your `.env` file**
-
-```
-GROQ_API_KEY=your_groq_api_key_here
-GROQ_MODEL=llama3-8b-8192
-```
-
-**3. Start the server the same way**
-
-```bash
-uvicorn main:app --reload --port 8000
-```
-
----
-
-### Option C — Run with Docker
-
-```bash
-# Start everything (app + Ollama) with one command
-docker compose up -d
-
-# Pull the model into the Ollama container (first time only)
-docker exec -it ollama ollama pull llama3
-```
-
-Access at `http://localhost:8000`
 
 ---
 
@@ -246,33 +207,6 @@ The agent infers this is an `analysis`, makes reasonable assumptions about scope
 
 ---
 
-## Deployment
-
-### Deploy on a Cloud VM (AWS / GCP / Azure)
-
-```bash
-# On your VM
-sudo apt update && sudo apt install -y docker.io docker-compose-plugin
-git clone https://github.com/yourname/TODO_agent.git
-cd TODO_agent
-docker compose up -d
-docker exec -it ollama ollama pull llama3
-```
-
-Open port 8000 in your cloud firewall and access at `http://your-server-ip:8000`.
-
-### Deploy on Render.com (Free tier)
-
-1. Push your code to GitHub
-2. Go to [render.com](https://render.com) → New Web Service → Connect your repo
-3. Set build command: `pip install -r requirements.txt`
-4. Set start command: `uvicorn main:app --host 0.0.0.0 --port 8000`
-5. Add environment variable: `GROQ_API_KEY` = your key
-6. Deploy
-
-> Note: Use Groq instead of Ollama on Render — Ollama requires too much RAM for the free tier.
-
----
 
 ## Known Limitations
 
